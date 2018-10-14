@@ -6,7 +6,7 @@ content = File.read(file_name)
 new_content = if content =~ /make empty/
                 ''
               else
-                "#{content}\n#{edited}"
+                "#{content.chomp}\n-- edited with fake_editor.rb\n"
               end
 
 File.write(file_name, new_content)
