@@ -28,6 +28,20 @@ def clean_git_repo(dir)
   system('git', 'clean', '-f', dir)
 end
 
+def create_a_branch
+  system('git checkout -b mybranch')
+end
+
+def add_change
+  File.open('README.md', 'a') { |f| f.puts 'new_line' }
+end
+
+def commit_changes(subject = "My awesome patch", body = "I can not believe this repo was without it")
+  system('git add -A .')
+  message = [subject, body].compact.join("\n\n")
+  system("git commit -m '#{message}'")
+end
+
 def run_munihub(*args)
   system(FAKE_EDITOR_ENV, MUNIHUB_PATH, *args)
 end
