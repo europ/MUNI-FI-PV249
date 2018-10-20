@@ -44,7 +44,7 @@ end
 
 def run_munihub(editor_mode = 'sign')
   fake_editor_env = { 'EDITOR' => "#{FAKE_EDITOR} #{editor_mode}" }
-  system(fake_editor_env, MUNIHUB_PATH, 'pull-request')
+  IO.popen(fake_editor_env, [MUNIHUB_PATH, 'pull-request'], :err=>[:child, :out]) { |io| io.read }
 end
 
 def munihub_message
