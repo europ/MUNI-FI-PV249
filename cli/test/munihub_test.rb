@@ -95,7 +95,7 @@ EOF
         add_change
         commit_changes
 
-        puts run_munihub(args: ['-b', 'new_base'])
+        run_munihub(args: ['-b', 'new_base'])
         munihub_message.must_equal <<EOF
 My awesome patch
 
