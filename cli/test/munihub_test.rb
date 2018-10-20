@@ -104,4 +104,33 @@ EOF
       end
     end
   end
+
+  describe 'running tests' do
+    before do
+      init_git_repo(REPO_WITH_CONFIG)
+    end
+
+    after do
+      clean_git_repo(REPO_WITH_CONFIG)
+    end
+
+    describe 'for repo with tests defined' do
+      it 'succeeds when the tests pass' do
+        create_a_branch
+        FileUtils.touch('pass')
+        commit_changes
+        run_munihub
+        $?.exitstatus.must_equal 0
+      end
+
+      it 'fails with appropriate message when test fails' do
+        create_a_branch
+        add_change
+        commit_changes
+        message = run_munihub
+        $?.exitstatus.wont_equal 0
+        message.must_match(/tests failed/)
+      end
+    end
+  end
 end
