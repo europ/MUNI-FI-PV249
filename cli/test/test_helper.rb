@@ -7,7 +7,7 @@ MUNIHUB_PATH = File.expand_path('../munihub.rb', File.dirname(__FILE__))
 REPO_WITHOUT_CONFIG = File.join(SUPPORT_DIR, 'repo_without_config')
 REPO_WITH_CONFIG = File.join(SUPPORT_DIR, 'repo_with_config')
 
-FAKE_EDITOR_ENV = { 'EDITOR' => File.join(SUPPORT_DIR, 'fake_editor.rb') }
+FAKE_EDITOR = File.join(SUPPORT_DIR, 'fake_editor.rb')
 
 def init_git_repo(dir)
   @original_pwd = Dir.pwd
@@ -42,8 +42,9 @@ def commit_changes(subject = "My awesome patch", body = "I can not believe this 
   system("git commit -m '#{message}'")
 end
 
-def run_munihub(*args)
-  system(FAKE_EDITOR_ENV, MUNIHUB_PATH, *args)
+def run_munihub(editor_mode = 'sign')
+  fake_editor_env = { 'EDITOR' => "#{FAKE_EDITOR} #{editor_mode}" }
+  system(fake_editor_env, MUNIHUB_PATH, 'pull-request')
 end
 
 def munihub_message

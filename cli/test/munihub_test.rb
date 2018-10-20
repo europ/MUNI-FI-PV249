@@ -14,7 +14,7 @@ describe 'munihub.rb pull-request' do
       create_a_branch
       add_change
       commit_changes
-      run_munihub('pull-request')
+      run_munihub
       munihub_message.must_equal <<EOF
 My awesome patch
 
@@ -32,7 +32,7 @@ EOF
       add_change
       commit_changes('Second change', nil)
       add_change
-      run_munihub('pull-request')
+      run_munihub
       munihub_message.must_equal <<EOF
 # First change
 #
