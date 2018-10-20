@@ -28,12 +28,16 @@ def clean_git_repo(dir)
   system('git', 'clean', '-f', dir)
 end
 
-def create_a_branch
-  system('git checkout -b mybranch')
+def create_a_branch(branch = 'mybranch')
+  system("git checkout -b #{branch}")
 end
 
-def add_change
-  File.open('README.md', 'a') { |f| f.puts 'new_line' }
+def checkout(branch = 'mybranch')
+  system("git checkout #{branch}")
+end
+
+def add_change(line = 'new_line')
+  File.open('README.md', 'a') { |f| f.puts line }
 end
 
 def commit_changes(subject = "My awesome patch", body = "I can not believe this repo was without it")
@@ -42,9 +46,9 @@ def commit_changes(subject = "My awesome patch", body = "I can not believe this 
   system("git commit -m '#{message}'")
 end
 
-def run_munihub(editor_mode = 'sign')
+def run_munihub(args: [], editor_mode: 'leave')
   fake_editor_env = { 'EDITOR' => "#{FAKE_EDITOR} #{editor_mode}" }
-  IO.popen(fake_editor_env, [MUNIHUB_PATH, 'pull-request'], :err=>[:child, :out]) { |io| io.read }
+  IO.popen(fake_editor_env, [MUNIHUB_PATH, 'pull-request'].concat(args), :err=>[:child, :out]) { |io| io.read }
 end
 
 def munihub_message
