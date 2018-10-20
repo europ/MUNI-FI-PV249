@@ -13,7 +13,7 @@ DEBUG_COMMANDS = ENV['DEBUG_COMMANDS']
 
 def run_cmd(*args)
   puts "# #{args.join(' ')}" if DEBUG_COMMANDS
-  IO.popen(args, :err=>[:child, :out]) { |io| puts io.read if DEBUG_COMMANDS }
+  IO.popen(args, :err => [:child, :out]) { |io| puts io.read if DEBUG_COMMANDS }
 end
 
 def init_git_repo(dir)
@@ -57,7 +57,7 @@ def run_munihub(args: [], editor_mode: 'leave')
   fake_editor_env = { 'EDITOR' => "#{FAKE_EDITOR} #{editor_mode}" }
   command = [MUNIHUB_PATH, 'pull-request'].concat(args)
   puts "# #{command.join(' ')}" if DEBUG_COMMANDS
-  message = IO.popen(fake_editor_env, command, :err=>[:child, :out]) { |io| io.read }
+  message = IO.popen(fake_editor_env, command, :err => [:child, :out], &:read)
   puts message if DEBUG_COMMANDS
   message
 end

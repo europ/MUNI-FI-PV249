@@ -11,9 +11,8 @@ new_content = case operation
               when 'empty'
                 ''
               else
-                $STDERR.puts("Unknown operation #{operation}")
+                STDERR.puts("Unknown operation #{operation}")
                 exit 1
               end
 
 File.write(file_name, new_content)
-

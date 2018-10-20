@@ -16,12 +16,12 @@ describe 'munihub.rb pull-request' do
         add_change
         commit_changes
         run_munihub(editor_mode: 'sign')
-        munihub_message.must_equal <<EOF
+        munihub_message.must_equal <<MESSAGE
 My awesome patch
 
 I can not believe this repo was without it
 -- edited with fake_editor.rb
-EOF
+MESSAGE
       end
     end
 
@@ -34,14 +34,14 @@ EOF
         commit_changes('Second change', nil)
         add_change
         run_munihub(editor_mode: 'sign')
-        munihub_message.must_equal <<EOF
+        munihub_message.must_equal <<MESSAGE
 # First change
 #
 # more to come
 #
 # Second change
 -- edited with fake_editor.rb
-EOF
+MESSAGE
       end
     end
 
@@ -54,13 +54,13 @@ EOF
         commit_changes('Second change', nil)
         add_change
         message = run_munihub
-        munihub_message.must_equal <<EOF
+        munihub_message.must_equal <<MESSAGE
 # First change
 #
 # more to come
 #
 # Second change
-EOF
+MESSAGE
         $?.exitstatus.wont_equal 0
         message.must_match(/empty message/)
       end
@@ -96,11 +96,11 @@ EOF
         commit_changes
 
         run_munihub(args: ['-b', 'new_base'])
-        munihub_message.must_equal <<EOF
+        munihub_message.must_equal <<MESSAGE
 My awesome patch
 
 I can not believe this repo was without it
-EOF
+MESSAGE
       end
     end
   end
