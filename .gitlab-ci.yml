@@ -26,6 +26,9 @@ before_script:
   - cd cli
   - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
   - cd ..
+  - cd sinatra
+  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
+  - cd ..
 
 cli_rubocop:
   script:
@@ -35,4 +38,14 @@ cli_rubocop:
 cli_tests:
   script:
     - cd cli
+    - bundle exec rake test
+
+sinatra_rubocop:
+  script:
+    - cd sinatra
+    - bundle exec rake rubocop
+
+sinatra_tests:
+  script:
+    - cd sinatra
     - bundle exec rake test
