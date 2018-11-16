@@ -38,8 +38,8 @@ def init_git_repo(dir)
   Dir.mktmpdir do |tmpdir|
     run_cmd('git', 'clone', dir, tmpdir)
     Dir.chdir(tmpdir) do
-      run_cmd('git', 'config', '--global',  'user.email', 'testuser@example.com')
-      run_cmd('git', 'config', '--global',  'user.name', 'Test User')
+      run_cmd('git', 'config', 'user.email', 'testuser@example.com')
+      run_cmd('git', 'config', 'user.name', 'Test User')
       File.write('README.md', 'Hello World')
       run_cmd('git', 'add', '-A', '.')
       run_cmd('git', 'commit', '-m', 'First commit')
