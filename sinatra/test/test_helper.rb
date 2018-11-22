@@ -65,6 +65,7 @@ def clean_repositories_dir
   Dir[File.join(REPOSITORIES_DIR, '*')].each { |f| FileUtils.rm_r(f) }
 end
 
+clean_repositories_dir
 init_config
 init_git_repo(File.join(REPOSITORIES_DIR, SAMPLE_REPO))
 Minitest.after_run { clean_repositories_dir }
