@@ -36,7 +36,7 @@
 
 ### Projects
 
-1. **MiniHub** (Simple GitHub as an Rails application)
+1. **MiniHub** (Simple GitHub as a Rails application)
 2.
 3.
 
