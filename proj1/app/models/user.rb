@@ -5,4 +5,13 @@ class User < ApplicationRecord
 
   has_many :repositories
   has_many :issues
+
+  def password_digest
+    "#{password_salt}#{password_hash}"
+  end
+
+  def password_digest=(digest)
+    self.password_salt = digest.salt
+    self.password_hash = digest.checksum
+  end
 end

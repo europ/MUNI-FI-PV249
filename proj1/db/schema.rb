@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2019_10_10_080121) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
     t.string "password_hash"
     t.string "password_salt"
     t.datetime "created_at", precision: 6, null: false
