@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sessions
   root to: 'repositories#index'
   resources :issues
   resources :repositories
