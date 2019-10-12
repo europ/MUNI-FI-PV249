@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   resources :issues
   resources :repositories
 
-  root to: 'repositories#index'
+  root to: 'users#index'
 
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  get 'login', to: 'session#new'
+  post 'login', to: 'session#create'
+  delete 'logout', to: 'session#destroy'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
