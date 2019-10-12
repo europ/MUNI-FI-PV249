@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_10_080121) do
+ActiveRecord::Schema.define(version: 2019_10_09_182219) do
 
   create_table "issues", force: :cascade do |t|
     t.string "subject"
@@ -29,14 +29,6 @@ ActiveRecord::Schema.define(version: 2019_10_10_080121) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_repositories_on_user_id"
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.string "new"
-    t.string "create"
-    t.string "destroy"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
