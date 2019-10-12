@@ -1,3 +1,4 @@
 class Issue < ApplicationRecord
-  has_many :issues
+  belongs_to :users
+  belongs_to :repositories
 end
