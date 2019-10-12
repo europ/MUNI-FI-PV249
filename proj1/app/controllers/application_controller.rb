@@ -4,7 +4,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @user ||= User.find(session[:user_id])
+    begin
+      @user ||= User.find(session[:user_id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "You are currently not logged in. Please, log in!"
+      redirect_to login_path
+    end
   end
 
   def authenticated?
