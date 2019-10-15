@@ -7,7 +7,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @repository.user_id %>
+  <%= link_to "#{@repository.user_id}", user_path(@repository.user_id) %>
 </p>
 
 <%= link_to 'Edit', edit_repository_path(@repository) %> |

@@ -12,12 +12,12 @@
 
 <p>
   <strong>Repository:</strong>
-  <%= @issue.repository_id %>
+  <%= link_to "#{@issue.repository_id}", repository_path(@issue.repository_id) %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @issue.user.id %>
+  <%= link_to "#{@issue.user.id}", user_path(@issue.user.id) %>
 </p>
 
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
