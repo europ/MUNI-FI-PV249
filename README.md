@@ -6,7 +6,8 @@
 2. Simple IRC server in rails
 3. Ruby basics (language type, syntax, OOP, conventions)
 4. Git / GitHub / GitLab (commands, tips and tricks, best practices)
-5. Advanced Ruby (modules, mixins, objects, classes, meta programming)
+5. Advanced Ruby
+    * https://github.com/adamruzicka/advanced-ruby
 6.
 7.
 8.
