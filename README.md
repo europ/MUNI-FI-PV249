@@ -6,7 +6,7 @@
 2. Simple IRC server in rails
 3. Ruby basics (language type, syntax, OOP, conventions)
 4. Git / GitHub / GitLab (commands, tips and tricks, best practices)
-5.
+5. Advanced Ruby (modules, mixins, objects, classes, meta programming)
 6.
 7.
 8.
@@ -24,7 +24,7 @@
 2. Installing Ruby
 3. Commissioning simple IRC server in rails
 4. Project 1. - MiniHub
-5.
+5. Project 1. - MiniHub
 6.
 7.
 8.
