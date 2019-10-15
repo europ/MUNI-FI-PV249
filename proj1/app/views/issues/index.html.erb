@@ -8,6 +8,8 @@
       <tr>
         <th>Subject</th>
         <th>Text</th>
+        <th>Repository</th>
+        <th>User</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -17,6 +19,8 @@
         <tr>
           <td><%= issue.subject %></td>
           <td><%= issue.text %></td>
+          <td><%= issue.repository_id %></td>
+          <td><%= issue.user.id %></td>
           <td><%= link_to 'Show', issue %></td>
           <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
           <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
