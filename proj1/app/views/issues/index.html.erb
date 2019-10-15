@@ -6,6 +6,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Subject</th>
         <th>Text</th>
         <th>Repository ID</th>
@@ -19,6 +20,7 @@
     <tbody>
       <% @issues.each do |issue| %>
         <tr>
+          <td><%= issue.id %></td>
           <td><%= issue.subject %></td>
           <td><%= issue.text %></td>
           <td><%= link_to "#{issue.repository_id}", repository_path(issue.repository_id) %></td>

@@ -8,6 +8,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>Password hash</th>
@@ -19,6 +20,7 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
+          <td><%= user.id %></td>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td><%= user.password_hash %></td>

@@ -6,6 +6,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>User ID</th>
         <th>User Name</th>
@@ -16,6 +17,7 @@
     <tbody>
       <% @repositories.each do |repository| %>
         <tr>
+          <td><%= repository.id %></td>
           <td><%= repository.name %></td>
           <td><%= link_to "#{repository.user.id}", user_path(repository.user_id) %></td>
           <td><%= link_to "#{repository.user.name}", user_path(repository.user_id) %></td>
