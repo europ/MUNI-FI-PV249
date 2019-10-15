@@ -34,7 +34,7 @@
     ```
 3. Database creation
     ```sh
-    bundle exec rake db:create db:migrate
+    bundle exec rake db:create db:migrate db:seed
     ```
 4. [Increase the amount of inotify watchers](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers) temporary
     ```sh
