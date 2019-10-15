@@ -25,7 +25,7 @@ class RepositoriesController < ApplicationController
   # POST /repositories
   # POST /repositories.json
   def create
-    @repository = Repository.new(repository_params)
+    @repository = Repository.new(repository_params.merge(:user_id => self.current_user.id))
 
     respond_to do |format|
       if @repository.save
