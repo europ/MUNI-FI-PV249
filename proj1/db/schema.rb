@@ -15,12 +15,10 @@ ActiveRecord::Schema.define(version: 2019_10_09_182219) do
   create_table "issues", force: :cascade do |t|
     t.string "subject"
     t.string "text"
-    t.integer "user_id"
     t.integer "repository_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["repository_id"], name: "index_issues_on_repository_id"
-    t.index ["user_id"], name: "index_issues_on_user_id"
   end
 
   create_table "repositories", force: :cascade do |t|

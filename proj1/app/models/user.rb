@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :repositories
-  has_many :issues
+  has_many :issues, through: :repositories
 
   def password_digest
     "#{password_salt}#{password_hash}"

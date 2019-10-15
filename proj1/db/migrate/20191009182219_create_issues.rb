@@ -3,7 +3,6 @@ class CreateIssues < ActiveRecord::Migration[6.0]
     create_table :issues do |t|
       t.string :subject
       t.string :text
-      t.belongs_to :user
       t.belongs_to :repository
 
       t.timestamps

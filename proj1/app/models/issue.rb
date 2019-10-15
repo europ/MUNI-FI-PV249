@@ -1,4 +1,4 @@
 class Issue < ApplicationRecord
-  belongs_to :users
-  belongs_to :repositories
+  has_one :users, through: :repository
+  belongs_to :repository
 end
