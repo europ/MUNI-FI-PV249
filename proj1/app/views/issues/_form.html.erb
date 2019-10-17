@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :repository_id %>
-    <%= form.text_field :repository_id %>
+    <%= form.select :repository_id, Repository.pluck(:name, :id), {}%>
   </div>
 
   <div class="actions">

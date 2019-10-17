@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  has_many :repositories
+  has_many :repositories, :dependent => :destroy
   has_many :issues, through: :repositories
 
   def password_digest
