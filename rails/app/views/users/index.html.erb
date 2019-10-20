@@ -13,9 +13,11 @@
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
+        <% if current_user %>
         <th>Password hash</th>
         <th>Password salt</th>
         <th colspan="3"></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -24,12 +26,18 @@
       <tr>
         <td><%= user.id %></td>
         <td><%= user.name %></td>
-        <td><%= user.email %></td>
+        <% if current_user %>
+          <td><%= user.email %></td>
+        <% else %>
+          <td><%= "•" * user.email.length %></td>
+        <% end %>
+        <% if current_user %>
         <td><%= user.password_hash %></td>
         <td><%= user.password_salt %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>

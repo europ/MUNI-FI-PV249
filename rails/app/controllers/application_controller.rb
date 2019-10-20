@@ -4,19 +4,20 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    begin
+    if session[:user_id] != nil
       @user ||= User.find(session[:user_id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:error] = "You are currently not logged in. Please, log in!"
-      redirect_to login_path
     end
   end
+  helper_method :current_user
 
   def authenticated?
     current_user.present?
   end
 
   def authenticate!
-    redirect_to login_path unless authenticated?
+    unless authenticated?
+      flash[:error] = "You are currently not logged in. Please, log in!"
+      redirect_to login_path
+    end
   end
 end
