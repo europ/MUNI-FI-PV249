@@ -1,6 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Issues</h1>
+<div class="page-header">
+  <%= link_to new_issue_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Issue
+  <% end %>
+  <h1>Listing issues</h1>
+</div>
 
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
@@ -16,26 +20,21 @@
         <th colspan="3"></th>
       </tr>
     </thead>
-
     <tbody>
       <% @issues.each do |issue| %>
-        <tr>
-          <td><%= issue.id %></td>
-          <td><%= issue.subject %></td>
-          <td><%= issue.text %></td>
-          <td><%= link_to "#{issue.repository_id}", repository_path(issue.repository_id) %></td>
-          <td><%= link_to "#{issue.repository.name}", repository_path(issue.repository_id) %></td>
-          <td><%= link_to "#{issue.repository.user.id}", user_path(issue.repository.user.id) %></td>
-          <td><%= link_to "#{issue.repository.user.name}", user_path(issue.repository.user.id) %></td>
-          <td><%= link_to 'Show', issue %></td>
-          <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-          <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+      <tr>
+        <td><%= issue.id %></td>
+        <td><%= issue.subject %></td>
+        <td><%= issue.text %></td>
+        <td><%= link_to "#{issue.repository_id}", repository_path(issue.repository_id) %></td>
+        <td><%= link_to "#{issue.repository.name}", repository_path(issue.repository_id) %></td>
+        <td><%= link_to "#{issue.repository.user.id}", user_path(issue.repository.user.id) %></td>
+        <td><%= link_to "#{issue.repository.user.name}", user_path(issue.repository.user.id) %></td>
+        <td><%= link_to 'Show', issue %></td>
+        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
+        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
-<br>
-
-<%= link_to 'New Issue', new_issue_path %>

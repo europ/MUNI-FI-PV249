@@ -1,6 +1,13 @@
-<h1>Editing Issue</h1>
+<div class="page-header">
+  <%= link_to issues_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to @issue, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Show
+  <% end %>
+  <h1>Editing issue</h1>
+</div>
 
-<%= render 'form', issue: @issue %>
-
-<%= link_to 'Show', @issue %> |
-<%= link_to 'Back', issues_path %>
+<%= render 'form' %>
