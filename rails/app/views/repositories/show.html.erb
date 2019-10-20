@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <%= link_to repositories_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_repository_path(@repository), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show repository</h1>
+</div>
 
-<p>
-  <strong>ID:</strong>
-  <%= @repository.id %>
-</p>
+<dl class="dl-horizontal">
 
-<p>
-  <strong>Name:</strong>
-  <%= @repository.name %>
-</p>
+  <dt>ID:</dt>
+  <dd><%= @repository.id %></dd>
 
-<p>
-  <strong>User:</strong>
-  <%= link_to "#{@repository.user_id}", user_path(@repository.user_id) %>
-</p>
+  <dt>Name:</dt>
+  <dd><%= @repository.name %></dd>
 
-<%= link_to 'Edit', edit_repository_path(@repository) %> |
-<%= link_to 'Back', repositories_path %>
+  <dt>User ID:</dt>
+  <dd><%= link_to "#{@repository.user_id}", user_path(@repository.user_id) %></dd>
+
+  <dt>User Name:</dt>
+  <dd><%= link_to "#{@repository.user.name}", user_path(@repository.user_id) %></dd>
+</dl>
