@@ -8,7 +8,7 @@
 4. Git / GitHub / GitLab (commands, tips and tricks, best practices)
 5. Advanced Ruby
     * https://github.com/adamruzicka/advanced-ruby
-6.
+6. Unit testing
 7.
 8.
 9.
@@ -24,9 +24,9 @@
 1. (canceled)
 2. Installing Ruby and its further parts (bundler, gems, etc.)
 3. Commissioning a simple IRC server in rails
-4. MiniHub part 1 - Rails
-5. MiniHub part 1 - Rails
-6.
+4. (free)
+5. (free)
+6. (free)
 7.
 8.
 9.
