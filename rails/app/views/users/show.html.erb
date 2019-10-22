@@ -25,4 +25,11 @@
 
   <dt>Password salt:</dt>
   <dd><%= @user.password_salt %></dd>
+
+  <dt>User Repository IDs</dt>
+  <dd>
+    <% Repository.select { |repo| repo.user.id == user.id }.each do |repo| %>
+      <%= link_to("#{repo.id}", repository_path(repo.id)) %>,
+    <% end %>
+  </dd>
 </dl>

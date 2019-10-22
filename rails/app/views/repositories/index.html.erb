@@ -14,6 +14,7 @@
         <th>Name</th>
         <th>User ID</th>
         <th>User Name</th>
+        <th>Repository Issue IDs:</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -25,6 +26,11 @@
         <td><%= repository.name %></td>
         <td><%= link_to "#{repository.user.id}", user_path(repository.user.id) %></td>
         <td><%= link_to "#{repository.user.name}", user_path(repository.user.id) %></td>
+        <td>
+          <% Issue.select { |issue| issue.repository.id == repository.id }.each do |issue| %>
+            <%= link_to("#{issue.id}", issue_path(issue.id)) %>,
+          <% end %>
+        </td>
         <td><%= link_to 'Show', repository %></td>
         <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
         <td><%= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>

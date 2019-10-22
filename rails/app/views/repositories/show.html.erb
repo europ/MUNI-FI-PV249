@@ -11,7 +11,6 @@
 </div>
 
 <dl class="dl-horizontal">
-
   <dt>ID:</dt>
   <dd><%= @repository.id %></dd>
 
@@ -23,4 +22,11 @@
 
   <dt>User Name:</dt>
   <dd><%= link_to "#{@repository.user.name}", user_path(@repository.user.id) %></dd>
+
+  <dt>Repository Issue IDs:</dt>
+  <dd>
+    <% Issue.select { |issue| issue.repository.id == @repository.id }.each do |issue| %>
+      <%= link_to("#{issue.id}", issue_path(issue.id)) %>,
+    <% end %>
+  </dd>
 </dl>

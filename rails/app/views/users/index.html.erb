@@ -16,6 +16,7 @@
         <% if current_user %>
         <th>Password hash</th>
         <th>Password salt</th>
+        <th>User Repository IDs</th>
         <th colspan="3"></th>
         <% end %>
       </tr>
@@ -29,11 +30,16 @@
         <% if current_user %>
           <td><%= user.email %></td>
         <% else %>
-          <td><%= "•" * user.email.length %></td>
+          <td><%= "•" * 15 %></td>
         <% end %>
         <% if current_user %>
         <td><%= user.password_hash %></td>
         <td><%= user.password_salt %></td>
+        <td>
+          <% Repository.select { |repo| repo.user.id == user.id }.each do |repo| %>
+            <%= link_to("#{repo.id}", repository_path(repo.id)) %>,
+          <% end %>
+        </td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
