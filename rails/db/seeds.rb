@@ -8,8 +8,10 @@
 
 require 'faker'
 
+# user without repo or issue
 User.create(id: 0, name: 'asd', email: Faker::Internet.unique.safe_email, password: 'asd')
 
+# 3 users with 3 repositories which have 3 issues
 for i in 1..3
   user = User.create(name: Faker::Name.unique.first_name.downcase, email: Faker::Internet.unique.safe_email, password: 'pswd')
   for j in 1..3
@@ -19,3 +21,7 @@ for i in 1..3
     end
   end
 end
+
+# repo without issues
+user = User.create(name: Faker::Name.unique.first_name.downcase, email: Faker::Internet.unique.safe_email, password: 'pswd')
+Repository.create(id: 0, name: Faker::Lorem.unique.word, user_id: user.id)
