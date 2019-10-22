@@ -14,9 +14,8 @@
         <th>Name</th>
         <th>Email</th>
         <% if current_user %>
-        <th>Password hash</th>
-        <th>Password salt</th>
         <th>User Repository IDs</th>
+        <th>User Issue IDs</th>
         <th colspan="3"></th>
         <% end %>
       </tr>
@@ -33,11 +32,14 @@
           <td><%= "•" * 15 %></td>
         <% end %>
         <% if current_user %>
-        <td><%= user.password_hash %></td>
-        <td><%= user.password_salt %></td>
         <td>
           <% Repository.select { |repo| repo.user.id == user.id }.each do |repo| %>
             <%= link_to("#{repo.id}", repository_path(repo.id)) %>,
+          <% end %>
+        </td>
+        <td>
+          <% Issue.select { |issue| issue.user.id == user.id }.each do |issue| %>
+            <%= link_to("#{issue.id}", repository_path(issue.id)) %>,
           <% end %>
         </td>
         <td><%= link_to 'Show', user %></td>

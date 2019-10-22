@@ -25,7 +25,7 @@ class RepositoriesController < ApplicationController
   # POST /repositories
   # POST /repositories.json
   def create
-    @repository = Repository.new(repository_params.merge(user_id: self.current_user.id))
+    @repository = Repository.new(repository_params)
 
     respond_to do |format|
       if @repository.save
@@ -70,6 +70,6 @@ class RepositoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repository_params
-      params.require(:repository).permit(:name)
+      params.require(:repository).permit(:name, :user_id)
     end
 end
