@@ -15,6 +15,6 @@ User.create(id: 1, name: 'asd', email: Faker::Internet.unique.safe_email, passwo
 10.upto(14) { |i| Repository.create(id: i, name: Faker::Lorem.unique.word, user_id: 1) }
 15.upto(20) { |i| Repository.create(id: i, name: Faker::Lorem.unique.word, user_id: 2) }
 
-1.upto(9)   { |i| Issue.create(id: i, subject: Faker::Lorem.unique.word, text: Faker::Lorem.unique.sentence, repository_id: i) }
-10.upto(14) { |i| Issue.create(id: i, subject: Faker::Lorem.unique.word, text: Faker::Lorem.unique.sentence, repository_id: 1) }
-15.upto(20) { |i| Issue.create(id: i, subject: Faker::Lorem.unique.word, text: Faker::Lorem.unique.sentence, repository_id: i-14) }
+1.upto(9)   { |i| Issue.create(id: i, subject: Faker::Lorem.unique.word, text: Faker::Lorem.unique.sentence, repository_id: i,    user_id: i % 10) }
+10.upto(14) { |i| Issue.create(id: i, subject: Faker::Lorem.unique.word, text: Faker::Lorem.unique.sentence, repository_id: 1,    user_id: i % 10) }
+15.upto(20) { |i| Issue.create(id: i, subject: Faker::Lorem.unique.word, text: Faker::Lorem.unique.sentence, repository_id: i-14, user_id: i % 10) }

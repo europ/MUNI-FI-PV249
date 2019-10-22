@@ -23,8 +23,8 @@
       <tr>
         <td><%= repository.id %></td>
         <td><%= repository.name %></td>
-        <td><%= link_to "#{repository.user.id}", user_path(repository.user_id) %></td>
-        <td><%= link_to "#{repository.user.name}", user_path(repository.user_id) %></td>
+        <td><%= link_to "#{repository.user.id}", user_path(repository.user.id) %></td>
+        <td><%= link_to "#{repository.user.name}", user_path(repository.user.id) %></td>
         <td><%= link_to 'Show', repository %></td>
         <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
         <td><%= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>

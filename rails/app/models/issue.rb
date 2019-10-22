@@ -3,6 +3,5 @@ class Issue < ApplicationRecord
   validates :text, presence: true
 
   belongs_to :repository
-
-  has_one :user, through: :repository
+  belongs_to :user
 end

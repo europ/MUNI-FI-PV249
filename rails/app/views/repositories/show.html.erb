@@ -19,8 +19,8 @@
   <dd><%= @repository.name %></dd>
 
   <dt>User ID:</dt>
-  <dd><%= link_to "#{@repository.user_id}", user_path(@repository.user_id) %></dd>
+  <dd><%= link_to "#{@repository.user.id}", user_path(@repository.user.id) %></dd>
 
   <dt>User Name:</dt>
-  <dd><%= link_to "#{@repository.user.name}", user_path(@repository.user_id) %></dd>
+  <dd><%= link_to "#{@repository.user.name}", user_path(@repository.user.id) %></dd>
 </dl>

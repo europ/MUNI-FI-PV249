@@ -4,6 +4,7 @@ class CreateIssues < ActiveRecord::Migration[6.0]
       t.string :subject
       t.string :text
       t.belongs_to :repository
+      t.belongs_to :user
 
       t.timestamps
     end

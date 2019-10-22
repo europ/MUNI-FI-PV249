@@ -21,10 +21,10 @@
   <dd><%= @issue.text %></dd>
 
   <dt>Repository ID:</dt>
-  <dd><%= link_to "#{@issue.repository_id}", repository_path(@issue.repository_id) %></dd>
+  <dd><%= link_to "#{@issue.repository.id}", repository_path(@issue.repository.id) %></dd>
 
   <dt>Repository Name:</dt>
-  <dd><%= link_to "#{@issue.repository.name}", repository_path(@issue.repository_id) %></dd>
+  <dd><%= link_to "#{@issue.repository.name}", repository_path(@issue.repository.id) %></dd>
 
   <dt>User ID:</dt>
   <dd><%= link_to "#{@issue.user.id}", user_path(@issue.user.id)%></dd>
