@@ -39,7 +39,7 @@
         </td>
         <td>
           <% Issue.select { |issue| issue.user.id == user.id }.each do |issue| %>
-            <%= link_to("#{issue.id}", repository_path(issue.id)) %>,
+            <%= link_to("#{issue.id}", issue_path(issue.id)) %>,
           <% end %>
         </td>
         <td><%= link_to 'Show', user %></td>
