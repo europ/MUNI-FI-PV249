@@ -9,8 +9,8 @@
 5. Advanced Ruby
     * https://github.com/adamruzicka/advanced-ruby
 6. Unit testing
-7.
-8.
+7. https://github.com/municz/study-materials/wiki#lecture-05---common-web-knowledge
+8. Sinatra
 9.
 10.
 11.
@@ -27,8 +27,8 @@
 4. (free)
 5. (free)
 6. (free)
-7.
-8.
+7. (free)
+8. (free) + system calls
 9.
 10.
 11.
