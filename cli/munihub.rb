@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'optparse'
 require 'tempfile'
 
 class Editor
@@ -73,14 +72,12 @@ class Options
     "\n"
   end
 end
+
 ########################################################################
 
-
 branch = Options.parse
-puts "OK"
+editor = Editor.new
+message = editor.load(branch)
+puts message
 
-=begin
-x = Editor.new
-t = x.load("hello")
-puts t
-=end
+
