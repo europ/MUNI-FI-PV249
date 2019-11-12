@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'pry'
+require 'awesome_print'
+require 'git'
 require 'tempfile'
 
 class Editor
@@ -75,9 +78,24 @@ end
 
 ########################################################################
 
-branch = Options.parse
+branch_base = Options.parse
+
+repo_path = `git rev-parse --show-toplevel`.strip!
+git = Git.open(repo_path)
+
+branch_source = git.branch.name
+branch_source = 'pr' # REMOVE
+
+commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n") # possible backtick attack
+
+text = String.new
+text << "# ===============================================\n"
+commits.each do |c|
+  text << "# commit #{c}\n"
+  text << "# " + git.gcommit(c).message + "\n"
+  text << "# ===============================================\n"
+end
+
 editor = Editor.new
-message = editor.load(branch)
+message = editor.load(text)
 puts message
-
-
