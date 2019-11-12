@@ -98,4 +98,15 @@ end
 
 editor = Editor.new
 message = editor.load(text)
-puts message
+
+# TASK'S 2nd PART
+retval = message.split("\n").any? { |line| line.start_with?(/^[^#].*$/) }
+unless retval
+  raise Exception.new('Incorrect pull-request text!')
+end
+
+ap message
+
+puts "\nSUCCESS"
+
+exit 0
