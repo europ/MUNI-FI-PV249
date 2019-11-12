@@ -92,20 +92,21 @@ text = String.new
 text << "# ===============================================\n"
 commits.each do |c|
   text << "# commit #{c}\n"
-  text << "# " + git.gcommit(c).message + "\n"
+  git.gcommit(c).message.split("\n").each do |line|
+    text << "# #{line}\n"
+  end
   text << "# ===============================================\n"
 end
 
 editor = Editor.new
 message = editor.load(text)
 
-# TASK'S 2nd PART
 retval = message.split("\n").any? { |line| line.start_with?(/^[^#].*$/) }
-unless retval
-  raise Exception.new('Incorrect pull-request text!')
-end
+raise Exception.new('Incorrect pull-request text!') unless retval
 
 ap message
+
+puts message
 
 puts "\nSUCCESS"
 
