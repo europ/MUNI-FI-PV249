@@ -5,12 +5,20 @@ require 'awesome_print'
 require 'git'
 require 'tempfile'
 
+class Error < Exception
+  attr_reader :code
+  def initialize(msg="Error!", code=1)
+    @code = code
+    super(msg)
+  end
+end
+
 class Editor
   def initialize
     begin
       @editor = ENV.fetch('EDITOR')
     rescue KeyError
-      raise Exception.new('Environment variable \'EDITOR\' is not set!')
+      raise Error.new('Environment variable \'EDITOR\' is not set!', 3)
     end
   end
 
@@ -22,7 +30,7 @@ class Editor
       if retval == true
         data = read(file)
       else
-        raise Exception.new('Editor error!')
+        raise Error.new('Editor error!', 4)
       end
     ensure
       file.close
@@ -43,19 +51,17 @@ end
 
 class Options
   def self.parse
-    if ARGV.first != 'pull-request'
+    if ARGV.shift != 'pull-request'
       error
     else
-      ARGV.shift
       if ARGV.length == 2 # -b base_branch
-        if ARGV.first == '-b'
-          ARGV.shift
-          return ARGV.first
+        if ARGV.shift == '-b'
+          ARGV.first
         else
           error
         end
       elsif ARGV.length == 0 # no option
-        return 'master'
+        'master'
       else
         error
       end
@@ -64,7 +70,7 @@ class Options
 
   def self.error
     help
-    raise Exception.new('Argument error!')
+    raise Error.new('Argument error!', 2)
   end
 
   def self.help
@@ -76,38 +82,42 @@ class Options
   end
 end
 
-########################################################################
+def main
+  branch_base = Options.parse
 
-branch_base = Options.parse
+  repo_path = `git rev-parse --show-toplevel`.strip!
+  git = Git.open(repo_path)
 
-repo_path = `git rev-parse --show-toplevel`.strip!
-git = Git.open(repo_path)
+  branch_source = git.branch.name
+  branch_source = 'pr' # REMOVE
 
-branch_source = git.branch.name
-branch_source = 'pr' # REMOVE
+  commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n") # possible backtick attack
 
-commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n") # possible backtick attack
-
-text = String.new
-text << "# ===============================================\n"
-commits.each do |c|
-  text << "# commit #{c}\n"
-  git.gcommit(c).message.split("\n").each do |line|
-    text << "# #{line}\n"
-  end
+  text = String.new
   text << "# ===============================================\n"
+  commits.each do |c|
+    text << "# commit #{c}\n"
+    git.gcommit(c).message.split("\n").each do |line|
+      text << "# #{line}\n"
+    end
+    text << "# ===============================================\n"
+  end
+
+  editor = Editor.new
+  message = editor.load(text)
+
+  retval = message.split("\n").any? { |line| line.start_with?(/^[^#].*$/) }
+  raise Error.new('Incorrect pull-request text!', 5) unless retval
+
+  puts "SUCCESS"
 end
 
-editor = Editor.new
-message = editor.load(text)
+########################################################################
 
-retval = message.split("\n").any? { |line| line.start_with?(/^[^#].*$/) }
-raise Exception.new('Incorrect pull-request text!') unless retval
-
-ap message
-
-puts message
-
-puts "\nSUCCESS"
-
-exit 0
+begin
+  main()
+  exit 0
+rescue Error => e
+  STDERR.puts(e.message)
+  exit e.code
+end
