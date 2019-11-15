@@ -7,7 +7,7 @@ require 'tempfile'
 
 class Error < Exception
   attr_reader :code
-  def initialize(msg="Error!", code=1)
+  def initialize(msg = "Error!", code = 1)
     @code = code
     super(msg)
   end
@@ -89,11 +89,11 @@ def main
   git = Git.open(repo_path)
 
   branch_source = git.branch.name
-  branch_source = 'pr' # REMOVE
+  branch_source = 'pr' # REMOVE
 
   commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n") # possible backtick attack
 
-  text = String.new
+  text = ""
   text << "# ===============================================\n"
   commits.each do |c|
     text << "# commit #{c}\n"
@@ -115,7 +115,7 @@ end
 ########################################################################
 
 begin
-  main()
+  main
   exit 0
 rescue Error => e
   STDERR.puts(e.message)
