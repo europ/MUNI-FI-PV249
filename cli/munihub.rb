@@ -106,10 +106,10 @@ def main
   editor = Editor.new
   message = editor.load(text)
 
-  retval = message.split("\n").any? { |line| line.start_with?(/^[^#].*$/) }
-  raise Error.new('Incorrect pull-request text!', 5) unless retval
+  text = message.scan(/^[^#].*$/)
+  raise Error.new('Incorrect pull-request text!', 5) unless text.any?
 
-  puts "SUCCESS"
+  puts text
 end
 
 ########################################################################
