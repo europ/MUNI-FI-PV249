@@ -1,5 +1,8 @@
 require 'minitest/autorun'
+require 'minitest/reporters'
 require 'fileutils'
+
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
 SUPPORT_DIR = File.expand_path('support', File.dirname(__FILE__))
 MUNIHUB_PATH = File.expand_path('../munihub.rb', File.dirname(__FILE__))
@@ -20,6 +23,8 @@ def init_git_repo(dir)
   @original_pwd = Dir.pwd
   Dir.chdir(dir)
   run_cmd('git', 'init')
+  run_cmd('git', 'config', 'user.name', 'testname')
+  run_cmd('git', 'config', 'user.email', 'testemail@example.com')
   run_cmd('git', 'add', '-A', '.')
   run_cmd('git', 'commit', '-m', 'First commit')
 end

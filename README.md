@@ -71,8 +71,8 @@ Zadání první fáze projektu:
 
 ### MiniHub - CLI
 
-TODO
+See [`cli/README.md`](cli/README.md)
 
 ### MiniHub - Sinatra
 
-TODO
+See [`sinatra/README.md`](sinatra/README.md)
