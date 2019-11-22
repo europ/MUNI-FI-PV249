@@ -167,7 +167,7 @@ def main
     end
 
     begin
-      yml_content = YAML.load_file(File.join(tmpgit.dir.path, 'cli', '.munihub.yml'))
+      yml_content = YAML.load_file(File.join(tmpgit.dir.path, '.munihub.yml'))
 
       yml_command = yml_content[:test_script]
       raise Error.new('Missing key in \'.munihub.yml\'!') unless yml_command
