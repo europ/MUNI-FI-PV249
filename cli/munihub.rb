@@ -172,8 +172,8 @@ def main
       yml_command = yml_content[:test_script]
       raise Error.new('Missing key in \'.munihub.yml\'!') unless yml_command
 
-      #retval = system(yml_command, chdir: dir)
-      #raise Error.new("Unsuccessfully executed command '#{yml_command}'!") unless retval
+      retval = system("ruby #{yml_command}", chdir: tmpgit.dir.path)
+      raise Error.new("Unsuccessfully executed command '#{yml_command}'!") unless retval
     rescue Errno::ENOENT
       raise Error.new('Missing file \'.munihub.yml\'!')
     end
@@ -183,14 +183,6 @@ def main
 end
 
 ########################################################################
-
-
-def DEBUG(tag,string)
-  `echo '#{tag}>>>#{string}<<<#{tag}' >> /tmp/txt`
-  `echo >> /tmp/txt`
-end
-
-`rm -f /tmp/txt` # DEBUG
 
 begin
   main
