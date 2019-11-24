@@ -1,12 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'pry'
-require 'awesome_print'
-require 'optparse'
 require 'git'
 require 'yaml'
 require 'tmpdir'
-require 'tempfile'
 
 ###############################################################
 
@@ -111,20 +107,17 @@ end
 ###############################################################
 
 def main
-
-  # branches
   branch_base = Options.parse
   branch_source = `git rev-parse --abbrev-ref HEAD`.strip!
 
-  # commit hashes
   commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n")
   if commits.size == 0
     raise Error.new('There is no commit difference!')
   end
 
-  # pull request text
+  # task point 1
   git = Git.open(Dir.pwd)
-  text = String.new
+  text = ''
   if commits.size == 1
     text << git.gcommit(commits.first).message
     text << "\n"
@@ -134,7 +127,7 @@ def main
         if line == "\n"
           text << "#\n"
         else
-          text << "# "+line.strip+"\n"
+          text << "# #{line.strip}\n"
         end
       end
       text << "#\n"
@@ -142,24 +135,18 @@ def main
     text = text[0..-3]
   end
 
-  # edit pull request text
+  # task point 2
   editor = Editor.new
   message = editor.fetch(text)
-  text = message.each_line.select{ |s| /^[^#].*$/.match(s) }
+  text = message.each_line.select { |s| /^[^#].*$/.match(s) }
   raise Error.new('Incorrect pull-request text!') unless text.any?
 
-  #exit 0
-
   Dir.mktmpdir do |dir|
+    # task point 3
     tmpgit = Git.clone(Dir.pwd, 'repo', path: dir)
 
-    #######################################################################
-    # FIX - this makes source branch available, fetch or pull does not help
-    tmpgit.checkout(branch_source)
-    tmpgit.checkout(branch_base)
-    #######################################################################
-
     begin
+      tmpgit.checkout(branch_source)
       tmpgit.checkout(branch_base)
       tmpgit.merge(branch_source)
     rescue Git::GitExecuteError
@@ -167,18 +154,21 @@ def main
     end
 
     begin
+      # task point 4
       yml_content = YAML.load_file(File.join(tmpgit.dir.path, '.munihub.yml'))
 
       yml_command = yml_content[:test_script]
       raise Error.new('Missing key in \'.munihub.yml\'!') unless yml_command
 
+      # task point 5
       retval = system("ruby #{yml_command}", chdir: tmpgit.dir.path)
       raise Error.new("Unsuccessfully executed command '#{yml_command}'!") unless retval
     rescue Errno::ENOENT
       raise Error.new('Missing file \'.munihub.yml\'!')
     end
 
-    text.each { |t| puts t}
+    # task point 6
+    text.each { |t| puts t }
   end
 end
 
