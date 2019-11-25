@@ -92,7 +92,7 @@ class Options
 
   def self.error
     help
-    raise Error.new('Option error!', ERROR_OPTION)
+    raise Error, 'Option error!', ERROR_OPTION
   end
 
   def self.help
@@ -112,7 +112,7 @@ def main
 
   commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n")
   if commits.size == 0
-    raise Error.new('There is no commit difference!')
+    raise Error, 'There is no commit difference!'
   end
 
   # task point 1
@@ -139,7 +139,7 @@ def main
   editor = Editor.new
   message = editor.fetch(text)
   text = message.each_line.select { |s| /^[^#].*$/.match(s) }
-  raise Error.new('Incorrect pull-request text!') unless text.any?
+  raise Error, 'Incorrect pull-request text!' unless text.any?
 
   Dir.mktmpdir do |dir|
     # task point 3
@@ -150,7 +150,7 @@ def main
       tmpgit.checkout(branch_base)
       tmpgit.merge(branch_source)
     rescue Git::GitExecuteError
-      raise Error.new('Merge error!')
+      raise Error, 'Merge error!'
     end
 
     begin
@@ -158,13 +158,13 @@ def main
       yml_content = YAML.load_file(File.join(tmpgit.dir.path, '.munihub.yml'))
 
       yml_command = yml_content[:test_script]
-      raise Error.new('Missing key in \'.munihub.yml\'!') unless yml_command
+      raise Error, 'Missing key in \'.munihub.yml\'!' unless yml_command
 
       # task point 5
       retval = system("ruby #{yml_command}", chdir: tmpgit.dir.path)
-      raise Error.new("Unsuccessfully executed command '#{yml_command}'!") unless retval
+      raise Error, "Unsuccessfully executed command '#{yml_command}'!" unless retval
     rescue Errno::ENOENT
-      raise Error.new('Missing file \'.munihub.yml\'!')
+      raise Error, 'Missing file \'.munihub.yml\'!'
     end
 
     # task point 6
