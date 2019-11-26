@@ -106,15 +106,7 @@ end
 
 ###############################################################
 
-def main
-  branch_base = Options.parse
-  branch_source = `git rev-parse --abbrev-ref HEAD`.strip!
-
-  commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n")
-  if commits.size == 0
-    raise Error, 'There is no commit difference!'
-  end
-
+def pr_text(commits)
   # task point 1
   git = Git.open(Dir.pwd)
   text = ''
@@ -134,19 +126,17 @@ def main
     end
     text = text[0..-3]
   end
+end
 
-  # task point 2
-  editor = Editor.new
-  message = editor.fetch(text)
-  text = message.each_line.select { |s| /^[^#].*$/.match(s) }
-  raise Error, 'Incorrect pull-request text!' unless text.any?
+###############################################################
 
+def main(branch_base, branch_source)
   Dir.mktmpdir do |dir|
     # task point 3
     tmpgit = Git.clone(Dir.pwd, 'repo', path: dir)
 
     begin
-      tmpgit.checkout(branch_source)
+      tmpgit.checkout(branch_source) # BUG FIX
       tmpgit.checkout(branch_base)
       tmpgit.merge(branch_source)
     rescue Git::GitExecuteError
@@ -166,16 +156,35 @@ def main
     rescue Errno::ENOENT
       raise Error, 'Missing file \'.munihub.yml\'!'
     end
-
-    # task point 6
-    text.each { |t| puts t }
   end
 end
 
 ########################################################################
 
 begin
-  main
+  # branches
+  branch_base = Options.parse
+  branch_source = `git rev-parse --abbrev-ref HEAD`.strip!
+
+  # commits
+  commits = `git cherry #{branch_base} #{branch_source} | cut -c3-`.split("\n")
+  raise Error, 'There is no commit difference!' if commits.empty?
+
+  # task point 1
+  text = pr_text(commits)
+
+  # task point 2
+  editor = Editor.new
+  message = editor.fetch(text)
+  text = message.each_line.select { |s| /^[^#].*$/.match(s) }
+  raise Error, 'Incorrect pull-request text!' unless text.any?
+
+  # task point 3,4.5
+  main(branch_base, branch_source)
+
+  # task point 6
+  text.each { |t| puts t }
+
   exit 0
 rescue Error => e
   STDERR.puts(e.message)
