@@ -4,6 +4,9 @@ require 'rack/test'
 require 'tmpdir'
 require 'yaml'
 
+require 'minitest/reporters'
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+
 $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 require 'munihub_git'
 

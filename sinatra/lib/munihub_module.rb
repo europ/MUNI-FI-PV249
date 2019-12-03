@@ -14,7 +14,7 @@ ERROR_CONFIG = 2
 
 def error(msg = 'An error occurred.', exitcode = ERROR)
   STDERR.puts("ERROR: #{msg}")
-  #exit exitcode
+  exit exitcode
 end
 
 def fetch_config
@@ -24,15 +24,11 @@ def fetch_config
     error("Configuration file does not include 'repositories_dir' key!", ERROR_CONFIG)
   end
 
-  if config.has_key?(:public_path)
-    config[:public_path].slice!(PUBLIC_PATH_SUFFIX)
-
-    unless File.directory?(config[:public_path])
-      error("Directory specified by 'public_path' does not exist!", ERROR_CONFIG)
-    end
-  else
+  unless config.has_key?(:public_path)
     error("Configuration file does not include 'public_path' key!", ERROR_CONFIG)
   end
+
+  config[:public_path].slice!(PUBLIC_PATH_SUFFIX)
 
   config
 end
