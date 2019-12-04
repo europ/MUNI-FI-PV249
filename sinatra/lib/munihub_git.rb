@@ -1,8 +1,6 @@
-require 'sinatra/base'
-
 require 'git'
 require 'json'
-require 'pry'
+require 'sinatra/base'
 
 require_relative './munihub_module'
 
@@ -33,15 +31,16 @@ module MunihubGit
     post '/repositories/:owner/:repository_name' do
       repo = File.join(@public_path, params[:owner], params[:repository_name])
 
-      `git -C #{repo} rev-parse`
-      if $?.success?
+      if File.directory?(File.join(repo, ".git"))
         status 409
         {
           message: 'Repository already exists'
         }.to_json
       else
+        FileUtils.rm_rf(repo)
         FileUtils.mkdir_p(repo)
-        `git -C #{repo} init`
+        `git init #{repo} --bare`
+
         {
           message: 'Repository created'
         }.to_json

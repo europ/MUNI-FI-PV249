@@ -36,7 +36,8 @@ end
 def init_git_repo(dir)
   FileUtils.mkdir_p(dir)
   Dir.chdir(dir) do
-    run_cmd('git', 'init', '--bare')
+    run_cmd('git', 'init', '--bare') # '--bare' does not create '.git'
+    Dir.mkdir('.git')
   end
   Dir.mktmpdir do |tmpdir|
     run_cmd('git', 'clone', dir, tmpdir)
