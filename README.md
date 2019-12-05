@@ -2,19 +2,19 @@
 
 ### Projects
 
-Simple MiniHub application (subset of GitHub or GitLab) divided into three separate parts:
+Simple MuniHub application (subset of GitHub or GitLab) divided into three separate parts:
 
 1. Rails
     * deadline: 20.10.2019
-    * specifications: [here](#minihub---rails)
+    * specifications: [here](#munihub---rails)
 2. CLI
     * deadline:
-    * specifications: [here](#minihub---cli)
+    * specifications: [here](#munihub---cli)
 3. Sinatra
     * deadline:
-    * specifications: [here](#minihub---sinatra)
+    * specifications: [here](#munihub---sinatra)
 
-### MiniHub - Rails
+### MuniHub - Rails
 
 Zadání první fáze projektu:
 * V adresáři `rails` vytvořte jednoduchou Rails aplikaci `MuniHub` která bude umět:
@@ -34,10 +34,10 @@ Zadání první fáze projektu:
   * User.login bude obsahovat jenom [a-z] znaky
 * Všechny fáze projektu budou v jednom repositáři, dbejte tedy na pojmenování podaresářů v projektu podle zadání úkolu (zde `rails`).
 
-### MiniHub - CLI
+### MuniHub - CLI
 
 See [`cli/README.md`](cli/README.md)
 
-### MiniHub - Sinatra
+### MuniHub - Sinatra
 
 See [`sinatra/README.md`](sinatra/README.md)
