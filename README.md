@@ -1,40 +1,5 @@
 # [PV249 - Development in Ruby](https://is.muni.cz/predmet/fi/podzim2019/PV249)
 
-### Lectures
-
-1. Entrance test
-2. Simple IRC server in rails
-3. Ruby basics (language type, syntax, OOP, conventions)
-4. Git / GitHub / GitLab (commands, tips and tricks, best practices)
-5. Advanced Ruby
-    * https://github.com/adamruzicka/advanced-ruby
-6. Unit testing
-7. https://github.com/municz/study-materials/wiki#lecture-05---common-web-knowledge
-8. Sinatra
-9.
-10.
-11.
-12.
-13.
-
-### Exercises
-
-* form of consultations, not mandatory
-
-1. (canceled)
-2. Installing Ruby and its further parts (bundler, gems, etc.)
-3. Commissioning a simple IRC server in rails
-4. (free)
-5. (free)
-6. (free)
-7. (free)
-8. (free) + system calls
-9.
-10.
-11.
-12.
-13.
-
 ### Projects
 
 Simple MiniHub application (subset of GitHub or GitLab) divided into three separate parts:
