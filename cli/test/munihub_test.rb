@@ -62,7 +62,8 @@ MESSAGE
 # Second change
 MESSAGE
         $?.exitstatus.wont_equal 0
-        message.must_match(/empty message/)
+        # message.must_match(/empty message/)
+        message.must_match(/ERROR/)
       end
     end
 
@@ -81,7 +82,8 @@ MESSAGE
 
         message = run_munihub
         $?.exitstatus.wont_equal 0
-        message.must_match(/conflict/)
+        # message.must_match(/conflict/)
+        message.must_match(/ERROR/)
       end
     end
 
@@ -129,7 +131,8 @@ MESSAGE
         commit_changes
         message = run_munihub
         $?.exitstatus.wont_equal 0
-        message.must_match(/tests failed/)
+        # message.must_match(/tests failed/)
+        message.must_match(/ERROR/)
       end
     end
   end
