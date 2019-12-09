@@ -1,0 +1,36 @@
+<div class="page-header">
+  <%= link_to new_issue_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Issue
+  <% end %>
+  <h1>Listing issues</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Subject</th>
+        <th>Text</th>
+        <th>Issue Repository ID</th>
+        <th>Issue User ID</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @issues.each do |issue| %>
+      <tr>
+        <td><%= issue.id %></td>
+        <td><%= issue.subject %></td>
+        <td><%= issue.text %></td>
+        <td><%= link_to "#{issue.repository.id}", repository_path(issue.repository.id) %></td>
+        <td><%= link_to "#{issue.user.id}", user_path(issue.user.id) %></td>
+        <td><%= link_to 'Show', issue %></td>
+        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
+        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
