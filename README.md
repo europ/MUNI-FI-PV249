@@ -2,6 +2,8 @@
 
 ### Projects
 
+The project had to be developed on GitLab. Each part stated below had to be submitted as a separate merge request. In the case that the merge request met the criteria (it was accepted by the teachers) the merge request was merged into the `master` branch. Branch `master` from GitLab is available in this repository under the acronym [`master_gitlab`](https://github.com/europ/MUNI-FI-PV249/tree/master_gitlab). The work history is available in [`master`](https://github.com/europ/MUNI-FI-PV249/tree/master) on GitHub.
+
 Simple MuniHub application (subset of GitHub or GitLab) divided into three separate parts:
 
 1. Rails
