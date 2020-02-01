@@ -1,0 +1,39 @@
+<div class="page-header">
+  <%= link_to new_repository_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Repository
+  <% end %>
+  <h1>Listing repositories</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Repository User ID</th>
+        <th>Repository Issue IDs</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @repositories.each do |repository| %>
+      <tr>
+        <td><%= repository.id %></td>
+        <td><%= repository.name %></td>
+        <td><%= link_to "#{repository.user.id}", user_path(repository.user.id) %></td>
+        <td>
+          <% Issue.select { |issue| issue.repository.id == repository.id }.each do |issue| %>
+            <%= link_to("#{issue.id}", issue_path(issue.id)) %>,
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', repository %></td>
+        <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
+        <td><%= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

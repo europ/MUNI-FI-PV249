@@ -1,0 +1,38 @@
+<div class="page-header">
+  <%= link_to issues_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_issue_path(@issue), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show issue</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>ID:</dt>
+  <dd><%= @issue.id %></dd>
+
+  <dt>Subject:</dt>
+  <dd><%= @issue.subject %></dd>
+
+  <dt>Text:</dt>
+  <dd><%= @issue.text %></dd>
+
+  <br>
+
+  <dt>Repository ID:</dt>
+  <dd><%= link_to "#{@issue.repository.id}", repository_path(@issue.repository.id) %></dd>
+
+  <dt>Repository Name:</dt>
+  <dd><%= link_to "#{@issue.repository.name}", repository_path(@issue.repository.id) %></dd>
+
+  <br>
+
+  <dt>User ID:</dt>
+  <dd><%= link_to "#{@issue.user.id}", user_path(@issue.user.id)%></dd>
+
+  <dt>User Name:</dt>
+  <dd><%= link_to "#{@issue.user.name}", user_path(@issue.user.id)%></dd>
+</dl>
